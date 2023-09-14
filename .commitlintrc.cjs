@@ -1,7 +1,12 @@
 const { readdirSync } = require('fs')
 const { resolve } = require('path')
 
-const packages = readdirSync(resolve(__dirname, 'packages'))
+const scopePaths = ['packages', 'apps']
+const packages = scopePaths.reduce((result, scopePath) => {
+  const scopes = readdirSync(resolve(__dirname, scopePath))
+
+  return result.concat(scopes)
+}, [])
 
 /**
  * @type { import('cz-git').UserConfig }
