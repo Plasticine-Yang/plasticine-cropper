@@ -1,0 +1,10 @@
+{
+  "name": "@plasticine-cropper/core",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup --dts",
+    "lint": "eslint src --fix",
+    "test": "vitest"
+  }
+}
