@@ -1,1 +1,1 @@
-export { CropperImpl } from './cropperImpl'
+export { CropperImpl } from './cropper-impl'
