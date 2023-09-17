@@ -20,5 +20,8 @@
     "build": "tsup --dts",
     "lint": "eslint src --fix",
     "test": "vitest"
+  },
+  "devDependencies": {
+    "@plasticine-cropper/esbuild-plugin-html": "workspace:^"
   }
 }
