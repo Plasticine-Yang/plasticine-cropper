@@ -26,6 +26,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@plasticine-cropper/esbuild-plugin-html": "workspace:^"
+    "@plasticine-cropper/esbuild-plugin-html": "workspace:^",
+    "esbuild-sass-plugin": "^2.15.0"
   }
 }
