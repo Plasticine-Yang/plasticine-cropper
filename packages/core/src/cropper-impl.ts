@@ -1,13 +1,15 @@
-import cropperTemplateHTML from './cropper-template.html'
-import type { Cropper } from './types'
+import { CropperRendererImpl } from './cropper-renderer-impl'
+import type { Cropper, CropperRenderer } from './types'
 
 class CropperImpl implements Cropper {
   private rawImageElement: HTMLImageElement
-  private rawImageContainerElement: ParentNode | null
+
+  /** 负责渲染 DOM */
+  private cropperRendererImpl: CropperRenderer
 
   constructor(imageElement: HTMLImageElement) {
     this.rawImageElement = imageElement
-    this.rawImageContainerElement = imageElement.parentNode
+    this.cropperRendererImpl = new CropperRendererImpl(imageElement)
 
     this.init()
   }
@@ -15,10 +17,13 @@ class CropperImpl implements Cropper {
   private init() {
     this.rawImageElement
 
-    const element = document.createElement('div')
-
-    element.innerHTML = cropperTemplateHTML
-    this.rawImageContainerElement?.appendChild(element)
+    try {
+      // 在传入的图片元素的 nextSibling 处插入 plasticine-cropper 元素
+      this.cropperRendererImpl.renderCropperTemplate()
+      this.cropperRendererImpl.hideRawImageElement()
+    } catch (error) {
+      console.error('[plasticine-cropper] init failed', error)
+    }
   }
 }
 

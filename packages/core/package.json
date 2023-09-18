@@ -13,6 +13,10 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./dist/plasticine-cropper.css": {
+      "require": "./dist/plasticine-cropper.css",
+      "import": "./dist/plasticine-cropper.css"
     }
   },
   "scripts": {
