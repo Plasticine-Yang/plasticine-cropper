@@ -10,5 +10,5 @@ export default defineConfig({
   clean: true,
   shims: true,
   sourcemap: true,
-  esbuildPlugins: [html],
+  esbuildPlugins: [html()],
 })
