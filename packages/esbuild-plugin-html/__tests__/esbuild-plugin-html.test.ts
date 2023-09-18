@@ -11,7 +11,7 @@ describe('esbuildPluginHtml', () => {
       entryPoints: [resolve(FIXTURES_PATH, 'foo.ts')],
       write: false,
       bundle: true,
-      plugins: [esbuildPluginHtml],
+      plugins: [esbuildPluginHtml()],
     })
 
     const compiledCodeList = outputFiles.map((outputFile) => outputFile.text)
