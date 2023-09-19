@@ -1,16 +1,26 @@
-import type { CropperRenderer } from './types'
-import { COMMON_HIDDEN } from './constants'
+import { CLASS_NAME_PREFIX, COMMON_HIDDEN } from './constants'
+import type { CropperElements, CropperRenderer } from './types'
 
 import cropperTemplateHTML from './cropper-template.html'
 
 class CropperRendererImpl implements CropperRenderer {
   private rawImageElement: HTMLImageElement
+  private cropperElements: CropperElements
 
   constructor(rawImageElement: HTMLImageElement) {
     this.rawImageElement = rawImageElement
+
+    // 渲染 cropper 相关元素，并存储相关元素的引用
+    this.renderCropperTemplate()
+
+    const root = this.rawImageElement.nextSibling as HTMLDivElement
+    this.cropperElements = {
+      root,
+      cropContainer: root.querySelector<HTMLDivElement>(`.${CLASS_NAME_PREFIX}__crop-container`)!,
+    }
   }
 
-  public renderCropperTemplate(): void {
+  private renderCropperTemplate(): void {
     const fragment = document.createDocumentFragment()
     const range = document.createRange()
     const cropperFragment = range.createContextualFragment(cropperTemplateHTML)
@@ -25,12 +35,23 @@ class CropperRendererImpl implements CropperRenderer {
     }
   }
 
+  public getCropperElements() {
+    return this.cropperElements
+  }
+
   public hideRawImageElement(): void {
     this.rawImageElement.classList.add(COMMON_HIDDEN)
   }
 
   public showRawImageElement(): void {
     this.rawImageElement.classList.remove(COMMON_HIDDEN)
+  }
+
+  public moveCropContainer(x: number, y: number): void {
+    const cropContainer = this.cropperElements.cropContainer
+
+    cropContainer.style.top = `${y}px`
+    cropContainer.style.left = `${x}px`
   }
 }
 

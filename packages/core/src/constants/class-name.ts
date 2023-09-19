@@ -1,4 +1,4 @@
-const CLASS_NAME_PREFIX = 'plasticine-cropper'
+export const CLASS_NAME_PREFIX = 'plasticine-cropper'
 
 /** 获取带有公共前缀的类名 */
 function resolveClassName(className: string) {

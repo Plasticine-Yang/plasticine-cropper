@@ -1,1 +1,3 @@
-export interface Cropper {}
+export interface Cropper {
+  destroy(): void
+}
