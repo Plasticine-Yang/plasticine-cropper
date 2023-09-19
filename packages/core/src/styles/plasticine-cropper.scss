@@ -1,3 +1,9 @@
+// crop-container 中水平虚线的间距 - 三等分平分容器高度
+$horizontal-dotted-line-spacing: calc(100% / 3);
+
+// crop-container 中垂直虚线的间距 - 三等分平分容器宽度
+$vertical-dotted-line-spacing: calc(100% / 3);
+
 .plasticine-cropper {
   position: relative;
   width: 100%;
@@ -21,24 +27,27 @@
   }
 
   &__dotted-line {
-    border: 3px dotted rgba($color: #ffffff, $alpha: 0.4);
+    position: absolute;
+    display: block;
+    border: 0 dotted #eee;
+    opacity: 0.5;
 
     &--horizontal {
-      position: absolute;
-      top: 50%;
+      top: $horizontal-dotted-line-spacing;
       left: 0;
       width: 100%;
-      height: 30%;
-      transform: translateY(-50%);
+      height: $horizontal-dotted-line-spacing;
+      border-bottom-width: 3px;
+      border-top-width: 3px;
     }
 
     &--vertical {
-      position: absolute;
       top: 0;
-      left: 50%;
-      width: 30%;
+      left: $vertical-dotted-line-spacing;
+      width: $vertical-dotted-line-spacing;
       height: 100%;
-      transform: translateX(-50%);
+      border-left-width: 3px;
+      border-right-width: 3px;
     }
   }
 
