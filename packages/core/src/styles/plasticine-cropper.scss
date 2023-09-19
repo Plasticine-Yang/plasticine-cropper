@@ -24,6 +24,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
     position: relative;
     width: 400px;
     height: 300px;
+    cursor: move;
   }
 
   &__dotted-line {
@@ -52,7 +53,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
   }
 
   &__line {
-    background: cyan;
+    background: rgb(51, 153, 255);
     position: absolute;
 
     &--n {
@@ -60,6 +61,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       left: 0;
       width: 100%;
       height: 1px;
+      cursor: ns-resize;
     }
 
     &--e {
@@ -67,6 +69,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       right: 0;
       width: 1px;
       height: 100%;
+      cursor: ew-resize;
     }
 
     &--s {
@@ -74,6 +77,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       left: 0;
       width: 100%;
       height: 1px;
+      cursor: ns-resize;
     }
 
     &--w {
@@ -81,6 +85,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       left: 0;
       width: 1px;
       height: 100%;
+      cursor: ew-resize;
     }
   }
 
@@ -88,55 +93,63 @@ $vertical-dotted-line-spacing: calc(100% / 3);
     position: absolute;
     width: 10px;
     height: 10px;
-    background: red;
+    background: rgb(51, 153, 255);
     border-radius: 50%;
 
     &--n {
       top: 0;
       left: 50%;
       transform: translate(-50%, -50%);
+      cursor: ns-resize;
     }
 
     &--e {
       top: 50%;
       right: 0;
       transform: translate(50%, -50%);
+      cursor: ew-resize;
     }
 
     &--s {
       bottom: 0;
       left: 50%;
       transform: translate(-50%, 50%);
+      cursor: ns-resize;
     }
 
     &--w {
       top: 50%;
       left: 0;
       transform: translate(-50%, -50%);
+      cursor: ew-resize;
     }
 
     &--ne {
       top: 0;
       right: 0;
       transform: translate(50%, -50%);
+      cursor: nesw-resize;
     }
 
     &--nw {
       top: 0;
       left: 0;
       transform: translate(-50%, -50%);
+      cursor: nwse-resize;
     }
 
     &--sw {
       bottom: 0;
       left: 0;
       transform: translate(-50%, 50%);
+      cursor: nesw-resize;
     }
 
     &--se {
       bottom: 0;
       right: 0;
       transform: translate(50%, 50%);
+      cursor: nwse-resize;
     }
   }
 }
