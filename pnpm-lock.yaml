@@ -91,12 +91,6 @@ importers:
         specifier: ^0.18.17
         version: 0.18.17
 
-  packages/vite-plugin-html:
-    devDependencies:
-      vite:
-        specifier: ^4.4.5
-        version: 4.4.9(@types/node@20.4.7)
-
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
