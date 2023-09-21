@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "turbo dev --filter=./packages/*",
     "build": "turbo build --filter=./packages/*",
+    "test": "turbo test --filter=./packages/*",
     "play": "turbo dev --filter=./apps/playground",
-    "test": "vitest",
-    "test:u": "vitest -u",
     "commit": "cz",
     "prepare": "husky install"
   },

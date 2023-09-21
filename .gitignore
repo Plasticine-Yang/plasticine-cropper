@@ -9,6 +9,7 @@ node_modules
 
 # dist
 dist
+internal-dist
 
 # Mac OS
 .DS_Store

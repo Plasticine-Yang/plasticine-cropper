@@ -21,12 +21,15 @@
   },
   "scripts": {
     "dev": "tsup --watch",
+    "dev:test": "tsup --config tsup-test.config.ts --watch",
     "build": "tsup",
+    "build:test": "tsup --config tsup-test.config.ts",
     "lint": "eslint src --fix",
     "test": "vitest"
   },
   "devDependencies": {
     "@plasticine-cropper/esbuild-plugin-html": "workspace:^",
-    "esbuild-sass-plugin": "^2.15.0"
+    "esbuild-sass-plugin": "^2.15.0",
+    "jsdom": "^22.1.0"
   }
 }
