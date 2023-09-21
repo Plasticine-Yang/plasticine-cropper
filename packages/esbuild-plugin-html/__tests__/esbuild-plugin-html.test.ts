@@ -20,10 +20,10 @@ describe('esbuildPluginHtml', () => {
       [
         "\\"use strict\\";
       (() => {
-        // packages/esbuild-plugin-html/__tests__/fixtures/foo.html
+        // __tests__/fixtures/foo.html
         var foo_default = '<!DOCTYPE html><html lang=\\"en\\"><head><meta charset=\\"UTF-8\\" /><meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" /><title>Foo</title></head><body></body></html>';
 
-        // packages/esbuild-plugin-html/__tests__/fixtures/foo.ts
+        // __tests__/fixtures/foo.ts
         var run = () => {
           return foo_default;
         };
