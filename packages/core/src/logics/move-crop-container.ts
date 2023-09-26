@@ -1,38 +1,67 @@
-import type { CropperRenderer, Logic } from '../types'
+/** 坐标 */
+interface Coordinate {
+  x: number
+  y: number
+}
 
-/** 移动 crop 窗口 */
-function createMoveCropContainerLogic(cropperRenderer: CropperRenderer): Logic {
-  const cropperElements = cropperRenderer.getCropperElements()
-  const root = cropperElements.root
-  const cropContainer = cropperElements.cropContainer
+/** 矩形 */
+interface Rect {
+  width: number
+  height: number
+}
 
-  /** 控制 crop 窗口是否可以移动 */
-  let moveable = false
+/** 移动裁切窗口 */
+class MoveCropContainerLogic {
+  /**
+   * 控制 crop 窗口是否可以移动
+   *
+   * @default false
+   */
+  public moveable: boolean
 
-  /** 记录开始移动时，鼠标相对 crop 窗口的偏移量 */
-  const mouseOffsetFromCropContainer = {
-    x: 0,
-    y: 0,
+  /** 鼠标相对裁切窗的偏移量 */
+  public mouseOffsetFromCropContainer: { x: number; y: number }
+
+  constructor() {
+    this.moveable = false
+    this.mouseOffsetFromCropContainer = { x: 0, y: 0 }
   }
 
-  function handleCropContainerActive(e: MouseEvent) {
-    moveable = true
+  /**
+   * 鼠标点击裁切窗时的逻辑 - 允许移动 & 记录鼠标相对裁切窗的偏移量
+   *
+   * @param mouseCoordinate 鼠标坐标
+   * @param cropContainerCoordinate 裁切窗坐标
+   */
+  public handleCropContainerActive(mouseCoordinate: Coordinate, cropContainerCoordinate: Coordinate) {
+    this.moveable = true
 
-    const cropContainerRect = cropContainer.getBoundingClientRect()
-    mouseOffsetFromCropContainer.x = e.clientX - cropContainerRect.left
-    mouseOffsetFromCropContainer.y = e.clientY - cropContainerRect.top
+    this.mouseOffsetFromCropContainer = {
+      x: mouseCoordinate.x - cropContainerCoordinate.x,
+      y: mouseCoordinate.y - cropContainerCoordinate.y,
+    }
   }
 
-  function handleCropContainerMove(e: MouseEvent) {
-    if (!moveable) {
-      return
+  /**
+   * 移动裁切窗口 - 本质上就是获取裁切窗口相对于根节点容器的坐标
+   *
+   * @param mouseCoordinate 鼠标坐标
+   * @param rootCoordinate plasticine-cropper 根节点容器坐标
+   */
+  public handleCropContainerMove(
+    mouseCoordinate: Coordinate,
+    rootCoordinate: Coordinate,
+    cropContainerRect: Rect,
+  ): Coordinate | null {
+    if (!this.moveable) {
+      return null
     }
 
-    /** 鼠标的 x 坐标 - 根节点容器的 left - 鼠标相对于 crop 窗口的横向偏移量 */
-    const x = e.clientX - root.offsetLeft - mouseOffsetFromCropContainer.x
+    /** 鼠标的 x 坐标 - 根节点容器的 x 坐标 - 鼠标相对于裁切窗口的横向偏移量 */
+    const x = mouseCoordinate.x - rootCoordinate.x - this.mouseOffsetFromCropContainer.x
 
-    /** 鼠标的 y 坐标 - 根节点容器的 top - 鼠标相对于 crop 窗口的纵向偏移量 */
-    const y = e.clientY - root.offsetTop - mouseOffsetFromCropContainer.y
+    /** 鼠标的 y 坐标 - 根节点容器的 y 坐标 - 鼠标相对于裁切窗口的纵向偏移量 */
+    const y = mouseCoordinate.y - rootCoordinate.y - this.mouseOffsetFromCropContainer.y
 
     /** 最终生效的 x 坐标 -- 需要考虑到超出根节点左右边界时不出界 */
     const resolvedX =
@@ -40,7 +69,7 @@ function createMoveCropContainerLogic(cropperRenderer: CropperRenderer): Logic {
         ? // 超出左边界
           0
         : // 超出右边界
-          Math.min(x, cropContainer.clientWidth)
+          Math.min(x, cropContainerRect.width)
 
     /** 最终生效的 y 坐标 -- 需要考虑到超出根节点上下边界时不出界 */
     const resolvedY =
@@ -48,28 +77,19 @@ function createMoveCropContainerLogic(cropperRenderer: CropperRenderer): Logic {
         ? // 超出上边界
           0
         : // 超出下边界
-          Math.min(y, cropContainer.clientHeight)
+          Math.min(y, cropContainerRect.height)
 
-    cropperRenderer.moveCropContainer(resolvedX, resolvedY)
+    return {
+      x: resolvedX,
+      y: resolvedY,
+    }
   }
 
-  function handleCropContainerInactive() {
-    moveable = false
-  }
-
-  return {
-    bindEventListeners() {
-      cropContainer.addEventListener('mousedown', handleCropContainerActive)
-      root.addEventListener('mousemove', handleCropContainerMove)
-      window.addEventListener('mouseup', handleCropContainerInactive)
-    },
-
-    removeEventListeners() {
-      cropContainer.removeEventListener('mousedown', handleCropContainerActive)
-      root.removeEventListener('mousemove', handleCropContainerMove)
-      window.removeEventListener('mouseup', handleCropContainerInactive)
-    },
+  /** 鼠标松开时禁止移动 */
+  public handleCropContainerInactive() {
+    this.moveable = false
   }
 }
 
-export { createMoveCropContainerLogic }
+export { MoveCropContainerLogic }
+export type { Coordinate, Rect }
