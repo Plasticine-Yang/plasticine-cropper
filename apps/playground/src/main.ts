@@ -10,5 +10,5 @@ if (imageElement) {
 }
 
 function setup(imageElement: HTMLImageElement) {
-  new CropperImpl(imageElement)
+  new CropperImpl(imageElement, { moveable: true })
 }
