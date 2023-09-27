@@ -1,4 +1,5 @@
 import type { CropperElements } from './cropper-elements'
+import { CropContainerPosition, CropContainerSize } from './cropper-options'
 
 export interface CropperRenderer {
   /** 获取 cropper 相关元素 */
@@ -9,6 +10,9 @@ export interface CropperRenderer {
 
   /** 展示原始传入的图片元素 */
   showRawImageElement(): void
+
+  /** 渲染裁切窗口 */
+  renderCropContainer(cropContainerPosition: CropContainerPosition, cropContainerSize: CropContainerSize): void
 
   /** 让裁切窗口可移动 */
   makeCropContainerMoveable(): void

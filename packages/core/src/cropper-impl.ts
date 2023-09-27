@@ -26,15 +26,27 @@ class CropperImpl implements Cropper {
       // 创建事件管理器实例
       this.cropperEventManagerImpl = new CropperEventManagerImpl(this.cropperRendererImpl, this.resolvedCropperOptions)
 
-      // 隐藏原始的图片元素，展示 plasticine-cropper
-      this.cropperRendererImpl.hideRawImageElement()
+      this.render()
 
-      // 绑定事件
-      this.cropperEventManagerImpl.bindAllEventListeners()
+      this.bindAllEventListeners()
     } catch (error) {
       console.error('[plasticine-cropper] init failed', error)
       throw error
     }
+  }
+
+  private render() {
+    const { cropContainerConfig } = this.resolvedCropperOptions
+
+    // 隐藏原始的图片元素，展示 plasticine-cropper
+    this.cropperRendererImpl.hideRawImageElement()
+
+    // 渲染裁切窗口
+    this.cropperRendererImpl.renderCropContainer(cropContainerConfig.initialPosition, cropContainerConfig.initialSize)
+  }
+
+  private bindAllEventListeners() {
+    this.cropperEventManagerImpl.bindAllEventListeners()
   }
 
   public destroy(): void {

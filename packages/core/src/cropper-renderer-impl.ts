@@ -1,5 +1,5 @@
 import { CLASS_NAME_PREFIX, COMMON_HIDDEN, CROP_CONTAINER_MOVEABLE } from './constants'
-import type { CropperElements, CropperRenderer } from './types'
+import type { CropContainerPosition, CropContainerSize, CropperElements, CropperRenderer } from './types'
 
 import cropperTemplateHTML from './cropper-template.html'
 
@@ -45,6 +45,15 @@ class CropperRendererImpl implements CropperRenderer {
 
   public showRawImageElement(): void {
     this.rawImageElement.classList.remove(COMMON_HIDDEN)
+  }
+
+  public renderCropContainer(cropContainerPosition: CropContainerPosition, cropContainerSize: CropContainerSize): void {
+    const { cropContainer } = this.cropperElements
+
+    cropContainer.style.left = cropContainerPosition.left
+    cropContainer.style.top = cropContainerPosition.top
+    cropContainer.style.width = cropContainerSize.width
+    cropContainer.style.height = cropContainerSize.height
   }
 
   public makeCropContainerMoveable(): void {

@@ -17,7 +17,8 @@ class CropperEventManagerImpl implements CropperEventManager {
   }
 
   public bindAllEventListeners(): void {
-    const { moveable } = this.resolvedCropperOptions
+    const { cropContainerConfig } = this.resolvedCropperOptions
+    const { moveable } = cropContainerConfig
 
     moveable && this.moveCropContainerFeatureManager.enable()
   }
