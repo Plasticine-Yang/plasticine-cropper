@@ -7,6 +7,11 @@ describe('move crop container', () => {
       y: 0,
     }
 
+    const rootRect: Rect = {
+      width: 800,
+      height: 600,
+    }
+
     const cropContainerRect: Rect = {
       width: 400,
       height: 300,
@@ -26,12 +31,18 @@ describe('move crop container', () => {
 
     moveCropContainerLogic.handleCropContainerActive(initialMouseCoordinate, initialCropContainerCoordinate)
 
+    // mouse move from (0, 0) to (100, 100)
     const mouseCoordinate: Coordinate = {
       x: 100,
       y: 100,
     }
 
-    const result = moveCropContainerLogic.handleCropContainerMove(mouseCoordinate, rootCoordinate, cropContainerRect)
+    const result = moveCropContainerLogic.handleCropContainerMove({
+      mouseCoordinate,
+      rootCoordinate,
+      rootRect,
+      cropContainerRect,
+    })
 
     expect(result).not.toBeNull()
     expect(result!.x).toBe(100)
@@ -44,31 +55,42 @@ describe('move crop container', () => {
       y: 0,
     }
 
+    const rootRect: Rect = {
+      width: 800,
+      height: 600,
+    }
+
     const cropContainerRect: Rect = {
       width: 400,
       height: 300,
     }
 
     const initialMouseCoordinate: Coordinate = {
-      x: 400,
+      x: 0,
       y: 300,
     }
 
     const initialCropContainerCoordinate: Coordinate = {
       x: 0,
-      y: 0,
+      y: 300,
     }
 
     const moveCropContainerLogic = new MoveCropContainerLogic()
 
     moveCropContainerLogic.handleCropContainerActive(initialMouseCoordinate, initialCropContainerCoordinate)
 
+    // mouse move from (0, 300) to (0, -300)
     const mouseCoordinate: Coordinate = {
-      x: 400,
-      y: 200,
+      x: 0,
+      y: -300,
     }
 
-    const result = moveCropContainerLogic.handleCropContainerMove(mouseCoordinate, rootCoordinate, cropContainerRect)
+    const result = moveCropContainerLogic.handleCropContainerMove({
+      mouseCoordinate,
+      rootCoordinate,
+      rootRect,
+      cropContainerRect,
+    })
 
     expect(result).not.toBeNull()
     expect(result!.x).toBe(0)
@@ -81,18 +103,23 @@ describe('move crop container', () => {
       y: 0,
     }
 
+    const rootRect: Rect = {
+      width: 800,
+      height: 600,
+    }
+
     const cropContainerRect: Rect = {
       width: 400,
       height: 300,
     }
 
     const initialMouseCoordinate: Coordinate = {
-      x: 400,
+      x: 0,
       y: 0,
     }
 
     const initialCropContainerCoordinate: Coordinate = {
-      x: 400,
+      x: 0,
       y: 0,
     }
 
@@ -100,12 +127,18 @@ describe('move crop container', () => {
 
     moveCropContainerLogic.handleCropContainerActive(initialMouseCoordinate, initialCropContainerCoordinate)
 
+    // mouse move from (0, 0) to (800, 0)
     const mouseCoordinate: Coordinate = {
       x: 800,
       y: 0,
     }
 
-    const result = moveCropContainerLogic.handleCropContainerMove(mouseCoordinate, rootCoordinate, cropContainerRect)
+    const result = moveCropContainerLogic.handleCropContainerMove({
+      mouseCoordinate,
+      rootCoordinate,
+      rootRect,
+      cropContainerRect,
+    })
 
     expect(result).not.toBeNull()
     expect(result!.x).toBe(400)
@@ -118,6 +151,11 @@ describe('move crop container', () => {
       y: 0,
     }
 
+    const rootRect: Rect = {
+      width: 800,
+      height: 600,
+    }
+
     const cropContainerRect: Rect = {
       width: 400,
       height: 300,
@@ -125,24 +163,30 @@ describe('move crop container', () => {
 
     const initialMouseCoordinate: Coordinate = {
       x: 0,
-      y: 300,
+      y: 0,
     }
 
     const initialCropContainerCoordinate: Coordinate = {
       x: 0,
-      y: 300,
+      y: 0,
     }
 
     const moveCropContainerLogic = new MoveCropContainerLogic()
 
     moveCropContainerLogic.handleCropContainerActive(initialMouseCoordinate, initialCropContainerCoordinate)
 
+    // mouse move from (0, 0) to (0, 600)
     const mouseCoordinate: Coordinate = {
       x: 0,
       y: 600,
     }
 
-    const result = moveCropContainerLogic.handleCropContainerMove(mouseCoordinate, rootCoordinate, cropContainerRect)
+    const result = moveCropContainerLogic.handleCropContainerMove({
+      mouseCoordinate,
+      rootCoordinate,
+      rootRect,
+      cropContainerRect,
+    })
 
     expect(result).not.toBeNull()
     expect(result!.x).toBe(0)
@@ -155,18 +199,23 @@ describe('move crop container', () => {
       y: 0,
     }
 
+    const rootRect: Rect = {
+      width: 800,
+      height: 600,
+    }
+
     const cropContainerRect: Rect = {
       width: 400,
       height: 300,
     }
 
     const initialMouseCoordinate: Coordinate = {
-      x: 400,
-      y: 300,
+      x: 800,
+      y: 0,
     }
 
     const initialCropContainerCoordinate: Coordinate = {
-      x: 0,
+      x: 400,
       y: 0,
     }
 
@@ -174,12 +223,18 @@ describe('move crop container', () => {
 
     moveCropContainerLogic.handleCropContainerActive(initialMouseCoordinate, initialCropContainerCoordinate)
 
+    // mouse move from (800, 0) to (0, 0)
     const mouseCoordinate: Coordinate = {
-      x: 200,
-      y: 300,
+      x: 0,
+      y: 0,
     }
 
-    const result = moveCropContainerLogic.handleCropContainerMove(mouseCoordinate, rootCoordinate, cropContainerRect)
+    const result = moveCropContainerLogic.handleCropContainerMove({
+      mouseCoordinate,
+      rootCoordinate,
+      rootRect,
+      cropContainerRect,
+    })
 
     expect(result).not.toBeNull()
     expect(result!.x).toBe(0)
