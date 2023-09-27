@@ -48,14 +48,17 @@ class MoveCropContainerLogic {
    * @param mouseCoordinate 鼠标坐标
    * @param rootCoordinate plasticine-cropper 根节点容器坐标
    */
-  public handleCropContainerMove(
-    mouseCoordinate: Coordinate,
-    rootCoordinate: Coordinate,
-    cropContainerRect: Rect,
-  ): Coordinate | null {
+  public handleCropContainerMove(e: {
+    mouseCoordinate: Coordinate
+    rootCoordinate: Coordinate
+    rootRect: Rect
+    cropContainerRect: Rect
+  }): Coordinate | null {
     if (!this.moveable) {
       return null
     }
+
+    const { mouseCoordinate, rootCoordinate, rootRect, cropContainerRect } = e
 
     /** 鼠标的 x 坐标 - 根节点容器的 x 坐标 - 鼠标相对于裁切窗口的横向偏移量 */
     const x = mouseCoordinate.x - rootCoordinate.x - this.mouseOffsetFromCropContainer.x
@@ -69,7 +72,7 @@ class MoveCropContainerLogic {
         ? // 超出左边界
           0
         : // 超出右边界
-          Math.min(x, cropContainerRect.width)
+          Math.min(x, rootRect.width - cropContainerRect.width)
 
     /** 最终生效的 y 坐标 -- 需要考虑到超出根节点上下边界时不出界 */
     const resolvedY =
@@ -77,7 +80,7 @@ class MoveCropContainerLogic {
         ? // 超出上边界
           0
         : // 超出下边界
-          Math.min(y, cropContainerRect.height)
+          Math.min(y, rootRect.height - cropContainerRect.height)
 
     return {
       x: resolvedX,

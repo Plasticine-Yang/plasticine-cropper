@@ -27,13 +27,15 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
 
     const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
     const rootCoordinate: Coordinate = { x: root.offsetLeft, y: root.offsetTop }
+    const rootRect: Rect = { width: root.clientWidth, height: root.clientHeight }
     const cropContainerRect: Rect = { width: cropContainer.clientWidth, height: cropContainer.clientHeight }
 
-    const result = this.moveCropContainerLogic.handleCropContainerMove(
+    const result = this.moveCropContainerLogic.handleCropContainerMove({
       mouseCoordinate,
       rootCoordinate,
+      rootRect,
       cropContainerRect,
-    )
+    })
 
     if (result !== null) {
       const { x, y } = result
