@@ -10,5 +10,11 @@ if (imageElement) {
 }
 
 function setup(imageElement: HTMLImageElement) {
-  new CropperImpl(imageElement, { moveable: true })
+  new CropperImpl(imageElement, {
+    cropContainerConfig: {
+      moveable: true,
+      initialPosition: { left: '50px', top: '100px' },
+      initialSize: { width: '300px', height: '150px' },
+    },
+  })
 }
