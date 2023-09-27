@@ -49,6 +49,8 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
   public enable(): void {
     const { root, cropContainer } = this.cropperRenderer.getCropperElements()
 
+    this.cropperRenderer.makeCropContainerMoveable()
+
     cropContainer.addEventListener('mousedown', this.handleCropContainerMouseDown)
     root.addEventListener('mousemove', this.handleRootMouseMove)
     window.addEventListener('mouseup', this.handleWindowMouseUp)
@@ -56,6 +58,8 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
 
   public disable(): void {
     const { root, cropContainer } = this.cropperRenderer.getCropperElements()
+
+    this.cropperRenderer.makeCropContainerFreeze()
 
     cropContainer.removeEventListener('mousedown', this.handleCropContainerMouseDown)
     root.removeEventListener('mousemove', this.handleRootMouseMove)
