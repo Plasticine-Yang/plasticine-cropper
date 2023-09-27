@@ -10,9 +10,11 @@ body {
   align-items: center;
   width: 100%;
   height: 100vh;
+  background: #0b132b;
 }
 
 .container {
   width: 800px;
   height: 600px;
+  background: #1c2541;
 }
