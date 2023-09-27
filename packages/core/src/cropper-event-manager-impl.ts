@@ -1,24 +1,24 @@
-import { createMoveCropContainerLogic } from './logics'
-import type { CropperEventManager, CropperRenderer, Logic } from './types'
+import { MoveCropContainerFeatureManager } from './features'
+import type { CropperEventManager, CropperFeatureManager, CropperRenderer } from './types'
 
 class CropperEventManagerImpl implements CropperEventManager {
   private cropperRenderer: CropperRenderer
 
-  private moveCropContainerLogic: Logic
+  private moveCropContainerFeatureManager: CropperFeatureManager
 
   constructor(cropperRenderer: CropperRenderer) {
     this.cropperRenderer = cropperRenderer
 
-    // 相关逻辑初始化
-    this.moveCropContainerLogic = createMoveCropContainerLogic(this.cropperRenderer)
+    // 功能管理初始化
+    this.moveCropContainerFeatureManager = new MoveCropContainerFeatureManager(this.cropperRenderer)
   }
 
   public bindAllEventListeners(): void {
-    this.moveCropContainerLogic.bindEventListeners()
+    this.moveCropContainerFeatureManager.enable()
   }
 
   public removeAllEventListeners(): void {
-    this.moveCropContainerLogic.removeEventListeners()
+    this.moveCropContainerFeatureManager.disable()
   }
 }
 

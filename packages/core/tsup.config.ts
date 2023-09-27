@@ -1,5 +1,5 @@
-import { defineConfig } from 'tsup'
 import { sassPlugin as sass } from 'esbuild-sass-plugin'
+import { defineConfig } from 'tsup'
 
 import html from '@plasticine-cropper/esbuild-plugin-html'
 

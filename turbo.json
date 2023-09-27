@@ -5,12 +5,19 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    // 用于进行单元测试的构建
+    "build:test": {
+      "dependsOn": ["^build"],
+      "outputs": ["internal-dist/**"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
-    "test": {},
+    "test": {
+      "dependsOn": ["build:test"]
+    },
     "lint": {}
   }
 }
