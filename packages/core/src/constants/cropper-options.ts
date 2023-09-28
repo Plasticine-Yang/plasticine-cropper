@@ -5,6 +5,8 @@ import type { DeepRequired } from '../types/internal-types'
 export const DEFAULT_CROP_CONTAINER_CONFIG: DeepRequired<CropContainerConfig> = {
   moveable: true,
 
+  resizable: true,
+
   initialPosition: {
     left: '25%',
     top: '25%',

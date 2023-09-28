@@ -43,6 +43,11 @@ class CropperImpl implements Cropper {
 
     // 渲染裁切窗口
     this.cropperRenderer.renderCropContainer(cropContainerConfig.initialPosition, cropContainerConfig.initialSize)
+
+    // 根据配置决定裁切窗口是否可调节大小
+    cropContainerConfig.resizable
+      ? this.cropperRenderer.makeCropContainerResizable()
+      : this.cropperRenderer.makeCropContainerNotResizable()
   }
 
   private bindAllEventListeners() {

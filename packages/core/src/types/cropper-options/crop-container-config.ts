@@ -34,11 +34,18 @@ export interface CropContainerSize {
 
 export interface CropContainerConfig {
   /**
-   * 裁切窗口是否可移动
+   * 是否可移动
    *
    * @default true
    */
   moveable?: boolean
+
+  /**
+   * 是否可调整大小
+   *
+   * @default true
+   */
+  resizable?: boolean
 
   /** 初始位置 */
   initialPosition?: CropContainerPosition

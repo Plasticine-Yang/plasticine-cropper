@@ -56,6 +56,7 @@ $vertical-dotted-line-spacing: calc(100% / 3);
   &__line {
     background: rgb(51, 153, 255);
     position: absolute;
+    pointer-events: none;
 
     &--n {
       top: 0;
@@ -87,6 +88,10 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       width: 1px;
       height: 100%;
       cursor: ew-resize;
+    }
+
+    &.plasticine-cropper__line--not-resizable {
+      cursor: not-allowed;
     }
   }
 
@@ -151,6 +156,10 @@ $vertical-dotted-line-spacing: calc(100% / 3);
       right: 0;
       transform: translate(50%, 50%);
       cursor: nwse-resize;
+    }
+
+    &.plasticine-cropper__point--not-resizable {
+      cursor: not-allowed;
     }
   }
 }

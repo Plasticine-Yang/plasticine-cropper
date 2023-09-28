@@ -22,4 +22,10 @@ export interface CropperRenderer {
 
   /** 移动 crop 窗口 */
   moveCropContainer(x: number, y: number): void
+
+  /** 让裁切窗口可调节大小 */
+  makeCropContainerResizable(): void
+
+  /** 让裁切窗口不可调节大小 */
+  makeCropContainerNotResizable(): void
 }

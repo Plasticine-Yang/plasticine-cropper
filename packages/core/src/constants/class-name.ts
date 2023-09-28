@@ -10,5 +10,11 @@ function resolveClassName(className: string) {
 /** 隐藏元素 */
 export const COMMON_HIDDEN = resolveClassName('common-hidden')
 
-/** 裁切窗口可移动的样式 */
+/** 裁切窗口可移动 */
 export const CROP_CONTAINER_MOVEABLE = resolveClassName('__crop-container--moveable')
+
+/** 禁止裁切窗口的线调节大小 */
+export const CROPPER_LINE_NOT_RESIZABLE = resolveClassName('__line--not-resizable')
+
+/** 禁止裁切窗口的点调节大小 */
+export const CROPPER_POINT_NOT_RESIZABLE = resolveClassName('__point--not-resizable')

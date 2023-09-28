@@ -7,6 +7,8 @@ function resolveCropperOptions(options?: CropperOptions): ResolvedCropperOptions
     cropContainerConfig: {
       moveable: options?.cropContainerConfig?.moveable ?? DEFAULT_CROP_CONTAINER_CONFIG.moveable,
 
+      resizable: options?.cropContainerConfig?.resizable ?? DEFAULT_CROP_CONTAINER_CONFIG.resizable,
+
       initialPosition: {
         left: options?.cropContainerConfig?.initialPosition?.left ?? DEFAULT_CROP_CONTAINER_CONFIG.initialPosition.left,
         top: options?.cropContainerConfig?.initialPosition?.top ?? DEFAULT_CROP_CONTAINER_CONFIG.initialPosition.top,

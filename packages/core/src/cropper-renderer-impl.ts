@@ -1,4 +1,10 @@
-import { CLASS_NAME_PREFIX, COMMON_HIDDEN, CROP_CONTAINER_MOVEABLE } from './constants'
+import {
+  CLASS_NAME_PREFIX,
+  COMMON_HIDDEN,
+  CROPPER_LINE_NOT_RESIZABLE,
+  CROPPER_POINT_NOT_RESIZABLE,
+  CROP_CONTAINER_MOVEABLE,
+} from './constants'
 import type { CropContainerPosition, CropContainerSize, CropperElements, CropperRenderer } from './types'
 
 import cropperTemplateHTML from './cropper-template.html'
@@ -13,10 +19,32 @@ class CropperRendererImpl implements CropperRenderer {
     // 渲染 cropper 相关元素，并存储相关元素的引用
     this.renderCropperTemplate()
 
+    this.cropperElements = this.resolveCropperElements()
+  }
+
+  private resolveCropperElements(): CropperElements {
     const root = this.rawImageElement.nextSibling as HTMLDivElement
-    this.cropperElements = {
+    const cropContainer = root.querySelector<HTMLDivElement>(`.${CLASS_NAME_PREFIX}__crop-container`)!
+
+    return {
       root,
-      cropContainer: root.querySelector<HTMLDivElement>(`.${CLASS_NAME_PREFIX}__crop-container`)!,
+      cropContainer,
+      cropContainerLines: {
+        n: cropContainer.querySelector('.plasticine-cropper__line--n')!,
+        e: cropContainer.querySelector('.plasticine-cropper__line--e')!,
+        s: cropContainer.querySelector('.plasticine-cropper__line--s')!,
+        w: cropContainer.querySelector('.plasticine-cropper__line--w')!,
+      },
+      cropContainerPoints: {
+        n: cropContainer.querySelector('.plasticine-cropper__point--n')!,
+        ne: cropContainer.querySelector('.plasticine-cropper__point--ne')!,
+        e: cropContainer.querySelector('.plasticine-cropper__point--e')!,
+        se: cropContainer.querySelector('.plasticine-cropper__point--se')!,
+        s: cropContainer.querySelector('.plasticine-cropper__point--s')!,
+        sw: cropContainer.querySelector('.plasticine-cropper__point--sw')!,
+        w: cropContainer.querySelector('.plasticine-cropper__point--w')!,
+        nw: cropContainer.querySelector('.plasticine-cropper__point--nw')!,
+      },
     }
   }
 
@@ -73,6 +101,28 @@ class CropperRendererImpl implements CropperRenderer {
 
     cropContainer.style.top = `${y}px`
     cropContainer.style.left = `${x}px`
+  }
+
+  /** 内部调节裁切窗口是否可调节大小 - 供对外 API 复用 */
+  private setCropContainerResizable(resizable: boolean) {
+    const { cropContainerLines, cropContainerPoints } = this.cropperElements
+    const operation: 'add' | 'remove' = resizable ? 'remove' : 'add'
+
+    for (const lineElement of Object.values(cropContainerLines)) {
+      lineElement.classList[operation](CROPPER_LINE_NOT_RESIZABLE)
+    }
+
+    for (const pointElement of Object.values(cropContainerPoints)) {
+      pointElement.classList[operation](CROPPER_POINT_NOT_RESIZABLE)
+    }
+  }
+
+  public makeCropContainerResizable(): void {
+    this.setCropContainerResizable(true)
+  }
+
+  public makeCropContainerNotResizable(): void {
+    this.setCropContainerResizable(false)
   }
 }
 
