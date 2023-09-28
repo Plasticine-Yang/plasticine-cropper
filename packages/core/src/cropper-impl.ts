@@ -7,10 +7,10 @@ class CropperImpl implements Cropper {
   private rawImageElement: HTMLImageElement
 
   /** 负责渲染 DOM */
-  private cropperRendererImpl: CropperRenderer
+  private cropperRenderer: CropperRenderer
 
   /** 负责管理事件 */
-  private cropperEventManagerImpl: CropperEventManager
+  private cropperEventManager: CropperEventManager
 
   private resolvedCropperOptions: ResolvedCropperOptions
 
@@ -21,10 +21,10 @@ class CropperImpl implements Cropper {
       this.rawImageElement = imageElement
 
       // 创建渲染器实例
-      this.cropperRendererImpl = new CropperRendererImpl(this.rawImageElement)
+      this.cropperRenderer = new CropperRendererImpl(this.rawImageElement)
 
       // 创建事件管理器实例
-      this.cropperEventManagerImpl = new CropperEventManagerImpl(this.cropperRendererImpl, this.resolvedCropperOptions)
+      this.cropperEventManager = new CropperEventManagerImpl(this.cropperRenderer, this.resolvedCropperOptions)
 
       this.render()
 
@@ -39,18 +39,18 @@ class CropperImpl implements Cropper {
     const { cropContainerConfig } = this.resolvedCropperOptions
 
     // 隐藏原始的图片元素，展示 plasticine-cropper
-    this.cropperRendererImpl.hideRawImageElement()
+    this.cropperRenderer.hideRawImageElement()
 
     // 渲染裁切窗口
-    this.cropperRendererImpl.renderCropContainer(cropContainerConfig.initialPosition, cropContainerConfig.initialSize)
+    this.cropperRenderer.renderCropContainer(cropContainerConfig.initialPosition, cropContainerConfig.initialSize)
   }
 
   private bindAllEventListeners() {
-    this.cropperEventManagerImpl.bindAllEventListeners()
+    this.cropperEventManager.bindAllEventListeners()
   }
 
   public destroy(): void {
-    this.cropperEventManagerImpl.removeAllEventListeners()
+    this.cropperEventManager.removeAllEventListeners()
   }
 }
 
