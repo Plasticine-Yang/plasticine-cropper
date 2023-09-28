@@ -1,4 +1,9 @@
-import { CropperRendererImpl } from '@internal-dist/index'
+import {
+  type CropperRenderer,
+  CropperRendererImpl,
+  CROPPER_LINE_NOT_RESIZABLE,
+  CROPPER_POINT_NOT_RESIZABLE,
+} from '@internal-dist/index'
 
 describe('cropper renderer impl', () => {
   const setup = () => {
@@ -7,10 +12,10 @@ describe('cropper renderer impl', () => {
 
     containerElement.appendChild(imageElement)
 
-    const cropperRendererImpl = new CropperRendererImpl(imageElement)
+    const cropperRenderer: CropperRenderer = new CropperRendererImpl(imageElement)
 
     return {
-      cropperRendererImpl,
+      cropperRenderer,
       imageElement,
     }
   }
@@ -25,16 +30,16 @@ describe('cropper renderer impl', () => {
   })
 
   test('should get all cropper elements', () => {
-    const { cropperRendererImpl } = setup()
+    const { cropperRenderer } = setup()
 
-    expect(cropperRendererImpl.getCropperElements()).toMatchSnapshot()
+    expect(cropperRenderer.getCropperElements()).toMatchSnapshot()
   })
 
   test('should toggle visibility of raw image element', () => {
-    const { cropperRendererImpl, imageElement } = setup()
+    const { cropperRenderer, imageElement } = setup()
 
     // hide
-    cropperRendererImpl.hideRawImageElement()
+    cropperRenderer.hideRawImageElement()
     expect(Array.from(imageElement.classList)).toMatchInlineSnapshot(`
       [
         "plasticine-cropper-common-hidden",
@@ -42,15 +47,15 @@ describe('cropper renderer impl', () => {
     `)
 
     // show
-    cropperRendererImpl.showRawImageElement()
+    cropperRenderer.showRawImageElement()
     expect(Array.from(imageElement.classList)).toMatchInlineSnapshot('[]')
   })
 
   test('should move crop container', () => {
-    const { cropperRendererImpl } = setup()
-    const { cropContainer } = cropperRendererImpl.getCropperElements()
+    const { cropperRenderer } = setup()
+    const { cropContainer } = cropperRenderer.getCropperElements()
 
-    cropperRendererImpl.moveCropContainer(400, 300)
+    cropperRenderer.moveCropContainer(400, 300)
 
     expect({ top: cropContainer.style.top, left: cropContainer.style.left }).toMatchInlineSnapshot(`
       {
@@ -58,5 +63,30 @@ describe('cropper renderer impl', () => {
         "top": "300px",
       }
     `)
+  })
+
+  test('should control resizable of crop container', () => {
+    const { cropperRenderer } = setup()
+    const { cropContainerLines, cropContainerPoints } = cropperRenderer.getCropperElements()
+
+    cropperRenderer.makeCropContainerResizable()
+
+    for (const lineElement of Object.values(cropContainerLines)) {
+      expect(lineElement.classList.contains(CROPPER_LINE_NOT_RESIZABLE)).toBe(false)
+    }
+
+    for (const pointElement of Object.values(cropContainerPoints)) {
+      expect(pointElement.classList.contains(CROPPER_POINT_NOT_RESIZABLE)).toBe(false)
+    }
+
+    cropperRenderer.makeCropContainerNotResizable()
+
+    for (const lineElement of Object.values(cropContainerLines)) {
+      expect(lineElement.classList.contains(CROPPER_LINE_NOT_RESIZABLE)).toBe(true)
+    }
+
+    for (const pointElement of Object.values(cropContainerPoints)) {
+      expect(pointElement.classList.contains(CROPPER_POINT_NOT_RESIZABLE)).toBe(true)
+    }
   })
 })

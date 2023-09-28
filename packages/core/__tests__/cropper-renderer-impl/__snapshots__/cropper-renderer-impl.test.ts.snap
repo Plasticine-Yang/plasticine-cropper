@@ -54,6 +54,46 @@ exports[`cropper renderer impl > should get all cropper elements 1`] = `
       class="plasticine-cropper__point plasticine-cropper__point--se"
     />
   </div>,
+  "cropContainerLines": {
+    "e": <div
+      class="plasticine-cropper__line plasticine-cropper__line--e"
+    />,
+    "n": <div
+      class="plasticine-cropper__line plasticine-cropper__line--n"
+    />,
+    "s": <div
+      class="plasticine-cropper__line plasticine-cropper__line--s"
+    />,
+    "w": <div
+      class="plasticine-cropper__line plasticine-cropper__line--w"
+    />,
+  },
+  "cropContainerPoints": {
+    "e": <div
+      class="plasticine-cropper__point plasticine-cropper__point--e"
+    />,
+    "n": <div
+      class="plasticine-cropper__point plasticine-cropper__point--n"
+    />,
+    "ne": <div
+      class="plasticine-cropper__point plasticine-cropper__point--ne"
+    />,
+    "nw": <div
+      class="plasticine-cropper__point plasticine-cropper__point--nw"
+    />,
+    "s": <div
+      class="plasticine-cropper__point plasticine-cropper__point--s"
+    />,
+    "se": <div
+      class="plasticine-cropper__point plasticine-cropper__point--se"
+    />,
+    "sw": <div
+      class="plasticine-cropper__point plasticine-cropper__point--sw"
+    />,
+    "w": <div
+      class="plasticine-cropper__point plasticine-cropper__point--w"
+    />,
+  },
   "root": <div
     class="plasticine-cropper"
   >
