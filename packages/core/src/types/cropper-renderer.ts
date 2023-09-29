@@ -28,4 +28,7 @@ export interface CropperRenderer {
 
   /** 让裁切窗口不可调节大小 */
   makeCropContainerNotResizable(): void
+
+  /** 调整裁切窗口大小 */
+  resizeCropContainer(width: number, height: number): void
 }

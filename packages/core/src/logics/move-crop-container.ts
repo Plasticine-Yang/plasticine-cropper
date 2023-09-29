@@ -1,14 +1,4 @@
-/** 坐标 */
-interface Coordinate {
-  x: number
-  y: number
-}
-
-/** 矩形 */
-interface Rect {
-  width: number
-  height: number
-}
+import type { Coordinate, Rect } from '../types'
 
 /** 移动裁切窗口 */
 class MoveCropContainerLogic {
