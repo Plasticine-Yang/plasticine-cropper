@@ -14,12 +14,12 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
 
   private handleCropContainerMouseDown(e: MouseEvent) {
     const { cropContainer } = this.cropperRenderer.getCropperElements()
-    const cropContainerMovePlaceholderRect = cropContainer.getBoundingClientRect()
+    const cropContainerRect = cropContainer.getBoundingClientRect()
 
     const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
     const cropContainerCoordinate: Coordinate = {
-      x: cropContainerMovePlaceholderRect.left,
-      y: cropContainerMovePlaceholderRect.top,
+      x: cropContainerRect.left,
+      y: cropContainerRect.top,
     }
 
     this.moveCropContainerLogic.handleCropContainerActive(mouseCoordinate, cropContainerCoordinate)

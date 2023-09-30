@@ -5,7 +5,14 @@ import {
   CROPPER_POINT_NOT_RESIZABLE,
   CROP_CONTAINER_MOVEABLE,
 } from './constants'
-import type { CropContainerPosition, CropContainerSize, CropperElements, CropperRenderer } from './types'
+import type {
+  Coordinate,
+  CropContainerPosition,
+  CropContainerSize,
+  CropperElements,
+  CropperRenderer,
+  Rect,
+} from './types'
 
 import cropperTemplateHTML from './cropper-template.html'
 
@@ -28,13 +35,18 @@ class CropperRendererImpl implements CropperRenderer {
 
     return {
       root,
+
       cropContainer,
+
+      cropContainerMovePlaceholder: cropContainer.querySelector('.plasticine-cropper__move-placeholder')!,
+
       cropContainerLines: {
         n: cropContainer.querySelector('.plasticine-cropper__line--n')!,
         e: cropContainer.querySelector('.plasticine-cropper__line--e')!,
         s: cropContainer.querySelector('.plasticine-cropper__line--s')!,
         w: cropContainer.querySelector('.plasticine-cropper__line--w')!,
       },
+
       cropContainerPoints: {
         n: cropContainer.querySelector('.plasticine-cropper__point--n')!,
         ne: cropContainer.querySelector('.plasticine-cropper__point--ne')!,
@@ -96,8 +108,9 @@ class CropperRendererImpl implements CropperRenderer {
     cropContainer.classList.remove(CROP_CONTAINER_MOVEABLE)
   }
 
-  public moveCropContainer(x: number, y: number): void {
+  public moveCropContainer(cropContainerCoordinate: Coordinate): void {
     const { cropContainer } = this.cropperElements
+    const { x, y } = cropContainerCoordinate
 
     cropContainer.style.top = `${y}px`
     cropContainer.style.left = `${x}px`
@@ -123,6 +136,17 @@ class CropperRendererImpl implements CropperRenderer {
 
   public makeCropContainerNotResizable(): void {
     this.setCropContainerResizable(false)
+  }
+
+  public resizeCropContainer(cropContainerRect: Rect, cropContainerCoordinate?: Coordinate): void {
+    const { cropContainer } = this.cropperElements
+    const { width, height } = cropContainerRect
+    const { x, y } = cropContainerCoordinate ?? { x: cropContainer.style.left, y: cropContainer.style.top }
+
+    cropContainer.style.width = `${width}px`
+    cropContainer.style.height = `${height}px`
+    cropContainer.style.left = `${x}px`
+    cropContainer.style.top = `${y}px`
   }
 }
 

@@ -1,10 +1,14 @@
-import { MoveCropContainerFeatureManager } from './features'
+import { MoveCropContainerFeatureManager, ResizeCropContainerFeatureManager } from './features'
 import type { CropperEventManager, CropperFeatureManager, CropperRenderer, ResolvedCropperOptions } from './types'
 
 class CropperEventManagerImpl implements CropperEventManager {
   private cropperRenderer: CropperRenderer
 
+  /** 移动裁切窗口 */
   private moveCropContainerFeatureManager: CropperFeatureManager
+
+  /** 调节裁切窗口大小 */
+  private resizeCropContainerFeatureManager: CropperFeatureManager
 
   private resolvedCropperOptions: ResolvedCropperOptions
 
@@ -12,19 +16,21 @@ class CropperEventManagerImpl implements CropperEventManager {
     this.cropperRenderer = cropperRenderer
     this.resolvedCropperOptions = resolvedCropperOptions
 
-    // 移动裁切窗口功能初始化
     this.moveCropContainerFeatureManager = new MoveCropContainerFeatureManager(this.cropperRenderer)
+    this.resizeCropContainerFeatureManager = new ResizeCropContainerFeatureManager(this.cropperRenderer)
   }
 
   public bindAllEventListeners(): void {
     const { cropContainerConfig } = this.resolvedCropperOptions
-    const { moveable } = cropContainerConfig
+    const { moveable, resizable } = cropContainerConfig
 
     moveable && this.moveCropContainerFeatureManager.enable()
+    resizable && this.resizeCropContainerFeatureManager.enable()
   }
 
   public removeAllEventListeners(): void {
     this.moveCropContainerFeatureManager.disable()
+    this.resizeCropContainerFeatureManager.disable()
   }
 }
 

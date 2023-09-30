@@ -63,7 +63,6 @@ $vertical-dotted-line-spacing: calc(100% / 3);
   &__line {
     background: rgb(51, 153, 255);
     position: absolute;
-    pointer-events: none;
 
     &--n {
       top: 0;

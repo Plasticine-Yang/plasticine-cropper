@@ -1,5 +1,6 @@
 import type { CropperElements } from './cropper-elements'
 import { CropContainerPosition, CropContainerSize } from './cropper-options'
+import { Coordinate, Rect } from './shared'
 
 export interface CropperRenderer {
   /** 获取 cropper 相关元素 */
@@ -21,7 +22,7 @@ export interface CropperRenderer {
   makeCropContainerFreeze(): void
 
   /** 移动 crop 窗口 */
-  moveCropContainer(x: number, y: number): void
+  moveCropContainer(cropContainerCoordinate: Coordinate): void
 
   /** 让裁切窗口可调节大小 */
   makeCropContainerResizable(): void
@@ -30,5 +31,5 @@ export interface CropperRenderer {
   makeCropContainerNotResizable(): void
 
   /** 调整裁切窗口大小 */
-  resizeCropContainer(width: number, height: number): void
+  resizeCropContainer(cropContainerRect: Rect, cropContainerCoordinate?: Coordinate): void
 }

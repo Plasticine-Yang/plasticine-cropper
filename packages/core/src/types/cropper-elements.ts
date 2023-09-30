@@ -6,6 +6,9 @@ export interface CropperElements {
   /** 裁切窗口容器元素 */
   cropContainer: HTMLDivElement
 
+  /** 裁切窗口中用于绑定移动相关事件监听器的占位元素 */
+  cropContainerMovePlaceholder: HTMLDivElement
+
   /** 裁切窗口调节大小的四条线 */
   cropContainerLines: {
     n: HTMLDivElement
