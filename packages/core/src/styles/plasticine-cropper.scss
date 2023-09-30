@@ -28,6 +28,13 @@ $vertical-dotted-line-spacing: calc(100% / 3);
     }
   }
 
+  &__move-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   &__dotted-line {
     position: absolute;
     display: block;
