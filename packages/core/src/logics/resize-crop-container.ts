@@ -92,9 +92,6 @@ class ResizeCropContainerLogic {
       ? this.resizeStartCropContainerCoordinate.y + mouseMoveOffsetY
       : this.resizeStartCropContainerCoordinate.y
 
-    console.log(e)
-    console.log(nextCropContainerWidth, nextCropContainerHeight)
-
     return {
       cropContainerRect: {
         width: nextCropContainerWidth,
