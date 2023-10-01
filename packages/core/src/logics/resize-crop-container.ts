@@ -3,6 +3,8 @@ import {
   RESIZE_DIRECTION_OF_WIDTH,
   RESIZE_DIRECTION_OF_X,
   RESIZE_DIRECTION_OF_Y,
+  REVERSE_RESIZE_DIRECTION_OF_HEIGHT,
+  REVERSE_RESIZE_DIRECTION_OF_WIDTH,
 } from '../constants'
 import { ResizeDirection } from '../enums'
 import type { Coordinate, Rect, ResizeEvent, ResizeResult, ResizeStartEvent } from '../types'
@@ -67,12 +69,17 @@ class ResizeCropContainerLogic {
 
     /** 仅当方向会改变宽度时才计算 */
     const nextCropContainerWidth = RESIZE_DIRECTION_OF_WIDTH.includes(this.resizeStartDirection)
-      ? this.resizeStartCropContainerRect.width + mouseMoveOffsetX
+      ? // 与鼠标位移方向反向变化的方向
+        REVERSE_RESIZE_DIRECTION_OF_WIDTH.includes(this.resizeStartDirection)
+        ? this.resizeStartCropContainerRect.width - mouseMoveOffsetX
+        : this.resizeStartCropContainerRect.width + mouseMoveOffsetX
       : this.resizeStartCropContainerRect.width
 
     /** 仅当方向会改变高度时才计算 */
     const nextCropContainerHeight = RESIZE_DIRECTION_OF_HEIGHT.includes(this.resizeStartDirection)
-      ? this.resizeStartCropContainerRect.height + mouseMoveOffsetY
+      ? REVERSE_RESIZE_DIRECTION_OF_HEIGHT.includes(this.resizeStartDirection)
+        ? this.resizeStartCropContainerRect.height - mouseMoveOffsetY
+        : this.resizeStartCropContainerRect.height + mouseMoveOffsetY
       : this.resizeStartCropContainerRect.height
 
     /** 仅当方向会改变横坐标时才计算 */
