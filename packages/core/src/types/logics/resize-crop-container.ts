@@ -10,14 +10,14 @@ export interface ResizeStartEvent {
 
   /** 初始的鼠标坐标 */
   mouseCoordinate: Coordinate
+
+  /** 调整大小的方向 */
+  direction: ResizeDirection
 }
 
 export interface ResizeEvent {
   /** 鼠标坐标 */
   mouseCoordinate: Coordinate
-
-  /** 调整大小的方向 */
-  direction: ResizeDirection
 }
 
 export interface ResizeResult {

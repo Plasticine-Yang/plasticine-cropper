@@ -38,6 +38,8 @@ class ResizeCropContainerFeatureManager implements CropperFeatureManager {
         width: cropContainer.clientWidth,
         height: cropContainer.clientHeight,
       },
+
+      direction: ((e.target as HTMLDivElement).dataset as DataSetResizeDirection).plasticineCropperResizeDirection,
     }
 
     this.resizeCropContainerLogic.handleResizeStart(resizeStartEvent)
@@ -49,8 +51,6 @@ class ResizeCropContainerFeatureManager implements CropperFeatureManager {
         x: e.clientX,
         y: e.clientY,
       },
-
-      direction: ((e.target as HTMLDivElement).dataset as DataSetResizeDirection).plasticineCropperResizeDirection,
     }
 
     const result = this.resizeCropContainerLogic.handleResize(resizeEvent)

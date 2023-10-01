@@ -4,6 +4,7 @@ import {
   RESIZE_DIRECTION_OF_X,
   RESIZE_DIRECTION_OF_Y,
 } from '../constants'
+import { ResizeDirection } from '../enums'
 import type { Coordinate, Rect, ResizeEvent, ResizeResult, ResizeStartEvent } from '../types'
 
 class ResizeCropContainerLogic {
@@ -18,25 +19,27 @@ class ResizeCropContainerLogic {
   /** 记录开始时的裁切窗口坐标 - 作为计算调整大小后的坐标的基准 */
   private resizeStartCropContainerCoordinate: Coordinate | null
 
+  private resizeStartDirection: ResizeDirection | null
+
   constructor() {
     this.resizable = false
     this.resizeStartCoordinate = null
     this.resizeStartCropContainerRect = null
     this.resizeStartCropContainerCoordinate = null
+    this.resizeStartDirection = null
   }
 
   /**
    * 需要记录开始时的鼠标位置，用于计算差值得到变化后的宽高
    */
   public handleResizeStart(e: ResizeStartEvent) {
-    const { cropContainerCoordinate, cropContainerRect, mouseCoordinate } = e
-
-    console.log('start')
+    const { cropContainerCoordinate, cropContainerRect, mouseCoordinate, direction } = e
 
     this.resizable = true
     this.resizeStartCoordinate = mouseCoordinate
     this.resizeStartCropContainerRect = cropContainerRect
     this.resizeStartCropContainerCoordinate = cropContainerCoordinate
+    this.resizeStartDirection = direction
   }
 
   /**
@@ -48,12 +51,13 @@ class ResizeCropContainerLogic {
       !this.resizable ||
       this.resizeStartCoordinate === null ||
       this.resizeStartCropContainerRect === null ||
-      this.resizeStartCropContainerCoordinate === null
+      this.resizeStartCropContainerCoordinate === null ||
+      this.resizeStartDirection === null
     ) {
       return null
     }
 
-    const { mouseCoordinate, direction } = e
+    const { mouseCoordinate } = e
 
     /** 鼠标在 x 方向的偏移量 */
     const mouseMoveOffsetX = mouseCoordinate.x - this.resizeStartCoordinate.x
@@ -62,34 +66,27 @@ class ResizeCropContainerLogic {
     const mouseMoveOffsetY = mouseCoordinate.y - this.resizeStartCoordinate.y
 
     /** 仅当方向会改变宽度时才计算 */
-    const nextCropContainerWidth = RESIZE_DIRECTION_OF_WIDTH.includes(direction)
+    const nextCropContainerWidth = RESIZE_DIRECTION_OF_WIDTH.includes(this.resizeStartDirection)
       ? this.resizeStartCropContainerRect.width + mouseMoveOffsetX
       : this.resizeStartCropContainerRect.width
 
-    /** 仅当方向会改变宽度时才计算 */
-    const nextCropContainerHeight = RESIZE_DIRECTION_OF_HEIGHT.includes(direction)
+    /** 仅当方向会改变高度时才计算 */
+    const nextCropContainerHeight = RESIZE_DIRECTION_OF_HEIGHT.includes(this.resizeStartDirection)
       ? this.resizeStartCropContainerRect.height + mouseMoveOffsetY
       : this.resizeStartCropContainerRect.height
 
     /** 仅当方向会改变横坐标时才计算 */
-    const nextCropContainerX = RESIZE_DIRECTION_OF_X.includes(direction)
+    const nextCropContainerX = RESIZE_DIRECTION_OF_X.includes(this.resizeStartDirection)
       ? this.resizeStartCropContainerCoordinate.x + mouseMoveOffsetX
       : this.resizeStartCropContainerCoordinate.x
 
-    /** 仅当方向会改变横坐标时才计算 */
-    const nextCropContainerY = RESIZE_DIRECTION_OF_Y.includes(direction)
+    /** 仅当方向会改变纵坐标时才计算 */
+    const nextCropContainerY = RESIZE_DIRECTION_OF_Y.includes(this.resizeStartDirection)
       ? this.resizeStartCropContainerCoordinate.y + mouseMoveOffsetY
       : this.resizeStartCropContainerCoordinate.y
 
     console.log(e)
-    console.log(
-      mouseMoveOffsetX,
-      mouseMoveOffsetY,
-      nextCropContainerWidth,
-      nextCropContainerHeight,
-      nextCropContainerX,
-      nextCropContainerY,
-    )
+    console.log(nextCropContainerWidth, nextCropContainerHeight)
 
     return {
       cropContainerRect: {
@@ -105,9 +102,11 @@ class ResizeCropContainerLogic {
   }
 
   public handleResizeEnd() {
-    console.log('end')
     this.resizable = false
     this.resizeStartCoordinate = null
+    this.resizeStartCropContainerCoordinate = null
+    this.resizeStartCropContainerRect = null
+    this.resizeStartDirection = null
   }
 }
 
