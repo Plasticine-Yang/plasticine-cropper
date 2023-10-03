@@ -1,6 +1,6 @@
 import { CropperEventManagerImpl } from './cropper-event-manager-impl'
-import { CropperRendererImpl } from './cropper-renderer-impl'
 import { resolveCropperOptions } from './helpers'
+import { CropperRendererImpl } from './renderer'
 import type { Cropper, CropperEventManager, CropperOptions, CropperRenderer, ResolvedCropperOptions } from './types'
 
 class CropperImpl implements Cropper {
@@ -41,13 +41,22 @@ class CropperImpl implements Cropper {
     // 隐藏原始的图片元素，展示 plasticine-cropper
     this.cropperRenderer.hideRawImageElement()
 
+    // 挂载相关元素
+    this.cropperRenderer.mount()
+
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()!
+
     // 渲染裁切窗口
-    this.cropperRenderer.renderCropContainer(cropContainerConfig.initialPosition, cropContainerConfig.initialSize)
+    cropContainerRenderer.renderCropContainer({
+      coordinate: cropContainerConfig.initialPosition,
+      rect: cropContainerConfig.initialSize,
+    })
+
+    // 根据配置决定裁切窗口是否可移动
+    cropContainerConfig.moveable ? cropContainerRenderer.makeItMoveable() : cropContainerRenderer.makeItNotMoveable()
 
     // 根据配置决定裁切窗口是否可调节大小
-    cropContainerConfig.resizable
-      ? this.cropperRenderer.makeCropContainerResizable()
-      : this.cropperRenderer.makeCropContainerNotResizable()
+    cropContainerConfig.resizable ? cropContainerRenderer.makeItResizable() : cropContainerRenderer.makeItNotResizable()
   }
 
   private bindAllEventListeners() {

@@ -1,0 +1,377 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cropper renderer > should get all cropper elements 1`] = `
+{
+  "cropContainer": <div
+    class="plasticine-cropper__crop-container"
+  >
+    <div
+      class="plasticine-cropper__view-container"
+    />
+    <div
+      class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--horizontal"
+    />
+    <div
+      class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--vertical"
+    />
+    <div
+      class="plasticine-cropper__move-placeholder"
+    />
+    <div
+      class="plasticine-cropper__focus"
+    />
+    <div
+      class="plasticine-cropper__line plasticine-cropper__line--n"
+      data-plasticine-cropper-resize-direction="n"
+    />
+    <div
+      class="plasticine-cropper__line plasticine-cropper__line--e"
+      data-plasticine-cropper-resize-direction="e"
+    />
+    <div
+      class="plasticine-cropper__line plasticine-cropper__line--s"
+      data-plasticine-cropper-resize-direction="s"
+    />
+    <div
+      class="plasticine-cropper__line plasticine-cropper__line--w"
+      data-plasticine-cropper-resize-direction="w"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--n"
+      data-plasticine-cropper-resize-direction="n"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--e"
+      data-plasticine-cropper-resize-direction="e"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--s"
+      data-plasticine-cropper-resize-direction="s"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--w"
+      data-plasticine-cropper-resize-direction="w"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--ne"
+      data-plasticine-cropper-resize-direction="ne"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--nw"
+      data-plasticine-cropper-resize-direction="nw"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--sw"
+      data-plasticine-cropper-resize-direction="sw"
+    />
+    <div
+      class="plasticine-cropper__point plasticine-cropper__point--se"
+      data-plasticine-cropper-resize-direction="se"
+    />
+  </div>,
+  "cropContainerLines": {
+    "e": <div
+      class="plasticine-cropper__line plasticine-cropper__line--e"
+      data-plasticine-cropper-resize-direction="e"
+    />,
+    "n": <div
+      class="plasticine-cropper__line plasticine-cropper__line--n"
+      data-plasticine-cropper-resize-direction="n"
+    />,
+    "s": <div
+      class="plasticine-cropper__line plasticine-cropper__line--s"
+      data-plasticine-cropper-resize-direction="s"
+    />,
+    "w": <div
+      class="plasticine-cropper__line plasticine-cropper__line--w"
+      data-plasticine-cropper-resize-direction="w"
+    />,
+  },
+  "cropContainerMovePlaceholder": <div
+    class="plasticine-cropper__move-placeholder"
+  />,
+  "cropContainerPoints": {
+    "e": <div
+      class="plasticine-cropper__point plasticine-cropper__point--e"
+      data-plasticine-cropper-resize-direction="e"
+    />,
+    "n": <div
+      class="plasticine-cropper__point plasticine-cropper__point--n"
+      data-plasticine-cropper-resize-direction="n"
+    />,
+    "ne": <div
+      class="plasticine-cropper__point plasticine-cropper__point--ne"
+      data-plasticine-cropper-resize-direction="ne"
+    />,
+    "nw": <div
+      class="plasticine-cropper__point plasticine-cropper__point--nw"
+      data-plasticine-cropper-resize-direction="nw"
+    />,
+    "s": <div
+      class="plasticine-cropper__point plasticine-cropper__point--s"
+      data-plasticine-cropper-resize-direction="s"
+    />,
+    "se": <div
+      class="plasticine-cropper__point plasticine-cropper__point--se"
+      data-plasticine-cropper-resize-direction="se"
+    />,
+    "sw": <div
+      class="plasticine-cropper__point plasticine-cropper__point--sw"
+      data-plasticine-cropper-resize-direction="sw"
+    />,
+    "w": <div
+      class="plasticine-cropper__point plasticine-cropper__point--w"
+      data-plasticine-cropper-resize-direction="w"
+    />,
+  },
+  "root": <div
+    class="plasticine-cropper"
+  >
+    <div
+      class="plasticine-cropper__overlay"
+    />
+    <div
+      class="plasticine-cropper__canvas"
+    />
+    <div
+      class="plasticine-cropper__crop-container"
+    >
+      <div
+        class="plasticine-cropper__view-container"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--horizontal"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--vertical"
+      />
+      <div
+        class="plasticine-cropper__move-placeholder"
+      />
+      <div
+        class="plasticine-cropper__focus"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--ne"
+        data-plasticine-cropper-resize-direction="ne"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--nw"
+        data-plasticine-cropper-resize-direction="nw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--sw"
+        data-plasticine-cropper-resize-direction="sw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--se"
+        data-plasticine-cropper-resize-direction="se"
+      />
+    </div>
+  </div>,
+}
+`;
+
+exports[`cropper renderer > should mount 1`] = `
+<div>
+  <img />
+  <div
+    class="plasticine-cropper"
+  >
+    <div
+      class="plasticine-cropper__overlay"
+    />
+    <div
+      class="plasticine-cropper__canvas"
+    />
+    <div
+      class="plasticine-cropper__crop-container"
+    >
+      <div
+        class="plasticine-cropper__view-container"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--horizontal"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--vertical"
+      />
+      <div
+        class="plasticine-cropper__move-placeholder"
+      />
+      <div
+        class="plasticine-cropper__focus"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--ne"
+        data-plasticine-cropper-resize-direction="ne"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--nw"
+        data-plasticine-cropper-resize-direction="nw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--sw"
+        data-plasticine-cropper-resize-direction="sw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--se"
+        data-plasticine-cropper-resize-direction="se"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`cropper renderer > should unmount 1`] = `
+<div>
+  <img />
+  <div
+    class="plasticine-cropper"
+  >
+    <div
+      class="plasticine-cropper__overlay"
+    />
+    <div
+      class="plasticine-cropper__canvas"
+    />
+    <div
+      class="plasticine-cropper__crop-container"
+    >
+      <div
+        class="plasticine-cropper__view-container"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--horizontal"
+      />
+      <div
+        class="plasticine-cropper__dotted-line plasticine-cropper__dotted-line--vertical"
+      />
+      <div
+        class="plasticine-cropper__move-placeholder"
+      />
+      <div
+        class="plasticine-cropper__focus"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__line plasticine-cropper__line--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--n"
+        data-plasticine-cropper-resize-direction="n"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--e"
+        data-plasticine-cropper-resize-direction="e"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--s"
+        data-plasticine-cropper-resize-direction="s"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--w"
+        data-plasticine-cropper-resize-direction="w"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--ne"
+        data-plasticine-cropper-resize-direction="ne"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--nw"
+        data-plasticine-cropper-resize-direction="nw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--sw"
+        data-plasticine-cropper-resize-direction="sw"
+      />
+      <div
+        class="plasticine-cropper__point plasticine-cropper__point--se"
+        data-plasticine-cropper-resize-direction="se"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`cropper renderer > should unmount 2`] = `
+<div>
+  <img />
+</div>
+`;

@@ -21,42 +21,53 @@ class ResizeCropContainerFeatureManager implements CropperFeatureManager {
   }
 
   private handleMouseDown(e: MouseEvent) {
-    const { cropContainer } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
 
-    const resizeStartEvent: ResizeStartEvent = {
-      mouseCoordinate: {
-        x: e.clientX,
-        y: e.clientY,
-      },
+    if (cropperElements !== null) {
+      const { cropContainer } = cropperElements
 
-      cropContainerCoordinate: {
-        x: cropContainer.offsetLeft,
-        y: cropContainer.offsetTop,
-      },
+      const resizeStartEvent: ResizeStartEvent = {
+        mouseCoordinate: {
+          x: e.clientX,
+          y: e.clientY,
+        },
 
-      cropContainerRect: {
-        width: cropContainer.clientWidth,
-        height: cropContainer.clientHeight,
-      },
+        cropContainerCoordinate: {
+          x: cropContainer.offsetLeft,
+          y: cropContainer.offsetTop,
+        },
 
-      direction: ((e.target as HTMLDivElement).dataset as DataSetResizeDirection).plasticineCropperResizeDirection,
+        cropContainerRect: {
+          width: cropContainer.clientWidth,
+          height: cropContainer.clientHeight,
+        },
+
+        direction: ((e.target as HTMLDivElement).dataset as DataSetResizeDirection).plasticineCropperResizeDirection,
+      }
+
+      this.resizeCropContainerLogic.handleResizeStart(resizeStartEvent)
     }
-
-    this.resizeCropContainerLogic.handleResizeStart(resizeStartEvent)
   }
 
   private handleMouseMove(e: MouseEvent) {
-    const resizeEvent: ResizeEvent = {
-      mouseCoordinate: {
-        x: e.clientX,
-        y: e.clientY,
-      },
-    }
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    const result = this.resizeCropContainerLogic.handleResize(resizeEvent)
+    if (cropContainerRenderer !== null) {
+      const resizeEvent: ResizeEvent = {
+        mouseCoordinate: {
+          x: e.clientX,
+          y: e.clientY,
+        },
+      }
 
-    if (result !== null) {
-      this.cropperRenderer.resizeCropContainer(result.cropContainerRect, result.cropContainerCoordinate)
+      const result = this.resizeCropContainerLogic.handleResize(resizeEvent)
+
+      if (result !== null) {
+        cropContainerRenderer.renderCropContainer({
+          coordinate: result.cropContainerCoordinate,
+          rect: result.cropContainerRect,
+        })
+      }
     }
   }
 
@@ -65,33 +76,47 @@ class ResizeCropContainerFeatureManager implements CropperFeatureManager {
   }
 
   public enable(): void {
-    const { root, cropContainerLines, cropContainerPoints } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    for (const lineElement of Object.values(cropContainerLines)) {
-      lineElement.addEventListener('mousedown', this.handleMouseDown)
+    if (cropperElements !== null && cropContainerRenderer !== null) {
+      const { root, cropContainerLines, cropContainerPoints } = cropperElements
+
+      cropContainerRenderer.makeItResizable()
+
+      for (const lineElement of Object.values(cropContainerLines)) {
+        lineElement.addEventListener('mousedown', this.handleMouseDown)
+      }
+
+      for (const pointElement of Object.values(cropContainerPoints)) {
+        pointElement.addEventListener('mousedown', this.handleMouseDown)
+      }
+
+      root.addEventListener('mousemove', this.handleMouseMove)
+      root.addEventListener('mouseup', this.handleMouseUp)
     }
-
-    for (const pointElement of Object.values(cropContainerPoints)) {
-      pointElement.addEventListener('mousedown', this.handleMouseDown)
-    }
-
-    root.addEventListener('mousemove', this.handleMouseMove)
-    root.addEventListener('mouseup', this.handleMouseUp)
   }
 
   public disable(): void {
-    const { root, cropContainerLines, cropContainerPoints } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    for (const lineElement of Object.values(cropContainerLines)) {
-      lineElement.removeEventListener('mousedown', this.handleMouseDown)
+    if (cropperElements !== null && cropContainerRenderer !== null) {
+      const { root, cropContainerLines, cropContainerPoints } = cropperElements
+
+      cropContainerRenderer.makeItNotResizable()
+
+      for (const lineElement of Object.values(cropContainerLines)) {
+        lineElement.removeEventListener('mousedown', this.handleMouseDown)
+      }
+
+      for (const pointElement of Object.values(cropContainerPoints)) {
+        pointElement.removeEventListener('mousedown', this.handleMouseDown)
+      }
+
+      root.removeEventListener('mousemove', this.handleMouseMove)
+      root.removeEventListener('mouseup', this.handleMouseUp)
     }
-
-    for (const pointElement of Object.values(cropContainerPoints)) {
-      pointElement.removeEventListener('mousedown', this.handleMouseDown)
-    }
-
-    root.removeEventListener('mousemove', this.handleMouseMove)
-    root.removeEventListener('mouseup', this.handleMouseUp)
   }
 }
 

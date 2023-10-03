@@ -1,4 +1,4 @@
-import { type Coordinate, MoveCropContainerLogic, Rect } from '../logics'
+import { MoveCropContainerLogic, Rect, type Coordinate } from '../logics'
 import type { CropperFeatureManager, CropperRenderer } from '../types'
 
 class MoveCropContainerFeatureManager implements CropperFeatureManager {
@@ -13,35 +13,45 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
   }
 
   private handleCropContainerMouseDown(e: MouseEvent) {
-    const { cropContainer } = this.cropperRenderer.getCropperElements()
-    const cropContainerRect = cropContainer.getBoundingClientRect()
+    const cropperElements = this.cropperRenderer.getCropperElements()
 
-    const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
-    const cropContainerCoordinate: Coordinate = {
-      x: cropContainerRect.left,
-      y: cropContainerRect.top,
+    if (cropperElements !== null) {
+      const { cropContainer } = cropperElements
+
+      const cropContainerRect = cropContainer.getBoundingClientRect()
+
+      const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
+      const cropContainerCoordinate: Coordinate = {
+        x: cropContainerRect.left,
+        y: cropContainerRect.top,
+      }
+
+      this.moveCropContainerLogic.handleCropContainerActive(mouseCoordinate, cropContainerCoordinate)
     }
-
-    this.moveCropContainerLogic.handleCropContainerActive(mouseCoordinate, cropContainerCoordinate)
   }
 
   private handleRootMouseMove(e: MouseEvent) {
-    const { root, cropContainer } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
-    const rootCoordinate: Coordinate = { x: root.offsetLeft, y: root.offsetTop }
-    const rootRect: Rect = { width: root.clientWidth, height: root.clientHeight }
-    const cropContainerRect: Rect = { width: cropContainer.clientWidth, height: cropContainer.clientHeight }
+    if (cropperElements !== null && cropContainerRenderer !== null) {
+      const { root, cropContainer } = cropperElements
 
-    const nextCropContainerCoordinate = this.moveCropContainerLogic.handleCropContainerMove({
-      mouseCoordinate,
-      rootCoordinate,
-      rootRect,
-      cropContainerRect,
-    })
+      const mouseCoordinate: Coordinate = { x: e.clientX, y: e.clientY }
+      const rootCoordinate: Coordinate = { x: root.offsetLeft, y: root.offsetTop }
+      const rootRect: Rect = { width: root.clientWidth, height: root.clientHeight }
+      const cropContainerRect: Rect = { width: cropContainer.clientWidth, height: cropContainer.clientHeight }
 
-    if (nextCropContainerCoordinate !== null) {
-      this.cropperRenderer.moveCropContainer(nextCropContainerCoordinate)
+      const nextCropContainerCoordinate = this.moveCropContainerLogic.handleCropContainerMove({
+        mouseCoordinate,
+        rootCoordinate,
+        rootRect,
+        cropContainerRect,
+      })
+
+      if (nextCropContainerCoordinate !== null) {
+        cropContainerRenderer.renderCropContainer({ coordinate: nextCropContainerCoordinate })
+      }
     }
   }
 
@@ -50,23 +60,33 @@ class MoveCropContainerFeatureManager implements CropperFeatureManager {
   }
 
   public enable(): void {
-    const { root, cropContainerMovePlaceholder } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    this.cropperRenderer.makeCropContainerMoveable()
+    if (cropperElements !== null && cropContainerRenderer !== null) {
+      const { root, cropContainerMovePlaceholder } = cropperElements
 
-    cropContainerMovePlaceholder.addEventListener('mousedown', this.handleCropContainerMouseDown)
-    root.addEventListener('mousemove', this.handleRootMouseMove)
-    window.addEventListener('mouseup', this.handleWindowMouseUp)
+      cropContainerRenderer.makeItMoveable()
+
+      cropContainerMovePlaceholder.addEventListener('mousedown', this.handleCropContainerMouseDown)
+      root.addEventListener('mousemove', this.handleRootMouseMove)
+      window.addEventListener('mouseup', this.handleWindowMouseUp)
+    }
   }
 
   public disable(): void {
-    const { root, cropContainerMovePlaceholder } = this.cropperRenderer.getCropperElements()
+    const cropperElements = this.cropperRenderer.getCropperElements()
+    const cropContainerRenderer = this.cropperRenderer.getCropContainerRenderer()
 
-    this.cropperRenderer.makeCropContainerFreeze()
+    if (cropperElements !== null) {
+      const { root, cropContainerMovePlaceholder } = cropperElements
 
-    cropContainerMovePlaceholder.removeEventListener('mousedown', this.handleCropContainerMouseDown)
-    root.removeEventListener('mousemove', this.handleRootMouseMove)
-    window.removeEventListener('mouseup', this.handleWindowMouseUp)
+      cropContainerRenderer?.makeItNotMoveable()
+
+      cropContainerMovePlaceholder.removeEventListener('mousedown', this.handleCropContainerMouseDown)
+      root.removeEventListener('mousemove', this.handleRootMouseMove)
+      window.removeEventListener('mouseup', this.handleWindowMouseUp)
+    }
   }
 }
 

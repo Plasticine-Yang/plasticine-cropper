@@ -1,18 +1,18 @@
 /** 裁切窗口的位置 */
 export interface CropContainerPosition {
   /**
-   * 绝对定位下的 left
+   * 裁切窗口相对于 plasticine-cropper 根节点容器的横坐标
    *
-   * @default 25%
+   * @default 0
    */
-  left: string
+  x: number
 
   /**
-   * 绝对定位下的 top
+   * 裁切窗口相对于 plasticine-cropper 根节点容器的纵坐标
    *
-   * @default 25%
+   * @default 0
    */
-  top: string
+  y: number
 }
 
 /** 裁切窗口的尺寸 */
@@ -20,16 +20,16 @@ export interface CropContainerSize {
   /**
    * 宽度
    *
-   * @default 50%
+   * @default 0
    */
-  width: string
+  width: number
 
   /**
    * 高度
    *
-   * @default 50%
+   * @default 0
    */
-  height: string
+  height: number
 }
 
 export interface CropContainerConfig {

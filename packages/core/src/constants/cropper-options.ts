@@ -8,12 +8,12 @@ export const DEFAULT_CROP_CONTAINER_CONFIG: DeepRequired<CropContainerConfig> = 
   resizable: true,
 
   initialPosition: {
-    left: '25%',
-    top: '25%',
+    x: 0,
+    y: 0,
   },
 
   initialSize: {
-    width: '50%',
-    height: '50%',
+    width: 0,
+    height: 0,
   },
 }
