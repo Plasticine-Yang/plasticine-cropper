@@ -1,5 +1,5 @@
-import type { CropContainerConfig } from '../types'
-import type { DeepRequired } from '../types/internal-types'
+import type { CropContainerConfig } from '@/types'
+import type { DeepRequired } from '@/types/internal-types'
 
 /** 裁切窗口是否可移动的默认值 */
 export const DEFAULT_CROP_CONTAINER_CONFIG: DeepRequired<CropContainerConfig> = {

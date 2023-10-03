@@ -1,6 +1,6 @@
-import { CROPPER_LINE_NOT_RESIZABLE, CROPPER_POINT_NOT_RESIZABLE, CROP_CONTAINER_MOVEABLE } from '../constants'
-import { withPx } from '../helpers'
-import type { CropContainerRenderer, CropperElements, RenderCropContainerProps } from '../types'
+import { CROPPER_LINE_NOT_RESIZABLE, CROPPER_POINT_NOT_RESIZABLE, CROP_CONTAINER_MOVEABLE } from '@/constants'
+import { withPx } from '@/helpers'
+import type { CropContainerRenderer, CropperElements, RenderCropContainerProps } from '@/types'
 
 class CropContainerRendererImpl implements CropContainerRenderer {
   constructor(private cropperElements: CropperElements) {}

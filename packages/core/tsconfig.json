@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "lib": ["ESNext", "DOM"],
     "paths": {
+      "@/*": ["./src/*"],
       "@internal-dist/*": ["./internal-dist/*"]
     }
   },

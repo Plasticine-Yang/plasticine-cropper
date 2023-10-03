@@ -1,6 +1,7 @@
-import { CLASS_NAME_PREFIX, COMMON_HIDDEN } from '../constants'
-import cropperTemplateHTML from '../cropper-template.html'
-import type { CropContainerRenderer, CropperElements, CropperRenderer } from '../types'
+import { CLASS_NAME_PREFIX, COMMON_HIDDEN } from '@/constants'
+import cropperTemplateHTML from '@/cropper-template.html'
+import type { CropContainerRenderer, CropperElements, CropperRenderer } from '@/types'
+
 import { CropContainerRendererImpl } from './crop-container'
 
 class CropperRendererImpl implements CropperRenderer {

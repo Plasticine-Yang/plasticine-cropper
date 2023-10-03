@@ -1,4 +1,4 @@
-import { ResizeDirection } from '../../enums'
+import { ResizeDirection } from '@/enums'
 
 /** 会影响裁切窗口横坐标的 resize 方向 */
 export const RESIZE_DIRECTION_OF_X: ResizeDirection[] = [

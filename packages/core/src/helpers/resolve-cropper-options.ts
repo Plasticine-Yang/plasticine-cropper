@@ -1,5 +1,5 @@
-import { DEFAULT_CROP_CONTAINER_CONFIG } from '../constants'
-import type { CropperOptions, ResolvedCropperOptions } from '../types'
+import { DEFAULT_CROP_CONTAINER_CONFIG } from '@/constants'
+import type { CropperOptions, ResolvedCropperOptions } from '@/types'
 
 /** 将用户传入的参数解析成内部使用的参数 */
 function resolveCropperOptions(options?: CropperOptions): ResolvedCropperOptions {

@@ -1,5 +1,5 @@
-import { ResizeDirection } from '../../enums'
-import type { Coordinate, Rect } from '../shared'
+import { ResizeDirection } from '@/enums'
+import type { Coordinate, Rect } from '@/types/shared'
 
 export interface ResizeStartEvent {
   /** 初始的裁切窗口尺寸 */

@@ -1,5 +1,5 @@
-import { MoveCropContainerLogic, Rect, type Coordinate } from '../logics'
-import type { CropperFeatureManager, CropperRenderer } from '../types'
+import { MoveCropContainerLogic } from '@/logics'
+import type { Coordinate, CropperFeatureManager, CropperRenderer, Rect } from '@/types'
 
 class MoveCropContainerFeatureManager implements CropperFeatureManager {
   private moveCropContainerLogic: MoveCropContainerLogic

@@ -1,4 +1,4 @@
-import type { Coordinate, Rect } from '../types'
+import type { Coordinate, Rect } from '@/types'
 
 /** 移动裁切窗口 */
 class MoveCropContainerLogic {

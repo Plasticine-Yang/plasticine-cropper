@@ -1,11 +1,11 @@
-import { ResizeCropContainerLogic } from '../logics'
+import { ResizeCropContainerLogic } from '@/logics'
 import type {
   CropperFeatureManager,
   CropperRenderer,
   DataSetResizeDirection,
   ResizeEvent,
   ResizeStartEvent,
-} from '../types'
+} from '@/types'
 
 class ResizeCropContainerFeatureManager implements CropperFeatureManager {
   private cropperRenderer: CropperRenderer

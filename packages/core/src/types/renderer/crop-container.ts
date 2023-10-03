@@ -1,4 +1,4 @@
-import { Coordinate, Rect } from '../shared'
+import { Coordinate, Rect } from '@/types/shared'
 
 export interface CropContainerRenderer {
   /** 渲染裁切窗口 */

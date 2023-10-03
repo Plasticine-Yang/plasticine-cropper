@@ -5,9 +5,9 @@ import {
   RESIZE_DIRECTION_OF_Y,
   REVERSE_RESIZE_DIRECTION_OF_HEIGHT,
   REVERSE_RESIZE_DIRECTION_OF_WIDTH,
-} from '../constants'
-import { ResizeDirection } from '../enums'
-import type { Coordinate, Rect, ResizeEvent, ResizeResult, ResizeStartEvent } from '../types'
+} from '@/constants'
+import { ResizeDirection } from '@/enums'
+import type { Coordinate, Rect, ResizeEvent, ResizeResult, ResizeStartEvent } from '@/types'
 
 class ResizeCropContainerLogic {
   private resizable: boolean

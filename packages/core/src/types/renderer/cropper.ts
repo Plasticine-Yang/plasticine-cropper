@@ -1,4 +1,5 @@
-import type { CropperElements } from '../cropper-elements'
+import type { CropperElements } from '@/types/cropper-elements'
+
 import type { CropContainerRenderer } from './crop-container'
 
 export interface CropperRenderer {
