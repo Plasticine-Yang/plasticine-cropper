@@ -14,8 +14,8 @@ function setup(imageElement: HTMLImageElement) {
     cropContainerConfig: {
       moveable: true,
       resizable: true,
-      initialPosition: { left: '50px', top: '100px' },
-      initialSize: { width: '300px', height: '150px' },
+      initialPosition: { x: 50, y: 100 },
+      initialSize: { width: 300, height: 150 },
     },
   })
 }
